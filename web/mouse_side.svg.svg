@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <defs>
+    <linearGradient id="mouse-body" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a1a1a"/>
+      <stop offset="100%" stop-color="#0a0a0a"/>
+    </linearGradient>
+    <linearGradient id="mouse-accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00e5ff"/>
+      <stop offset="100%" stop-color="#0099cc"/>
+    </linearGradient>
+    <linearGradient id="grip-texture" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#222"/>
+      <stop offset="100%" stop-color="#111"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    <pattern id="grip-pattern" patternUnits="userSpaceOnUse" width="10" height="10" patternTransform="rotate(45)">
+      <rect width="2" height="2" fill="#333" rx="1"/>
+    </pattern>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="400" height="300" fill="#121821" rx="10"/>
+  
+  <!-- Mouse Side View -->
+  <g transform="translate(100, 50)">
+    <!-- Mouse Body -->
+    <path d="M50,100 C50,50 100,30 150,30 C200,30 250,50 250,100 C250,150 200,200 150,200 C100,200 50,150 50,100 Z" 
+          fill="url(#mouse-body)" stroke="#333" stroke-width="2"/>
+    
+    <!-- Side Grip Texture -->
+    <path d="M70,100 C70,70 100,50 150,50 C150,50 150,150 150,150 C100,150 70,130 70,100 Z" 
+          fill="url(#grip-texture)" stroke="none"/>
+    <path d="M70,100 C70,70 100,50 150,50 C150,50 150,150 150,150 C100,150 70,130 70,100 Z" 
+          fill="url(#grip-pattern)" fill-opacity="0.3" stroke="none"/>
+    
+    <!-- Side Buttons -->
+    <rect x="90" y="80" width="10" height="20" rx="5" fill="#333" stroke="#444" stroke-width="1"/>
+    <rect x="90" y="110" width="10" height="20" rx="5" fill="#333" stroke="#444" stroke-width="1"/>
+    
+    <!-- RGB Accent Line -->
+    <path d="M70,130 C90,160 120,180 150,180" 
+          fill="none" stroke="url(#mouse-accent)" stroke-width="4" filter="url(#glow)"/>
+  </g>
+  
+  <!-- Label -->
+  <text x="200" y="280" font-family="Arial, sans-serif" font-size="16" fill="#00e5ff" text-anchor="middle">Side Grip</text>
+</svg>

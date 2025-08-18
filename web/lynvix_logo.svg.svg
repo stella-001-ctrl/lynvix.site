@@ -1,0 +1,35 @@
+<svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="dark-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00e5ff" />
+      <stop offset="100%" stop-color="#39f" />
+    </linearGradient>
+  </defs>
+  <rect width="36" height="36" rx="8" fill="#121821"/>
+  <!-- Face outline -->
+  <path d="M18 6C13.5817 6 10 9.58172 10 14V22C10 26.4183 13.5817 30 18 30C22.4183 30 26 26.4183 26 22V14C26 9.58172 22.4183 6 18 6Z" fill="url(#dark-gradient)" stroke="#121821" stroke-width="1.5"/>
+
+  <!-- Ears -->
+  <path d="M11 11L9 7" stroke="#121821" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M25 11L27 7" stroke="#121821" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- Ear Tufts -->
+  <path d="M10 7 L11 9 L9 9 Z" fill="url(#dark-gradient)" />
+  <path d="M26 7 L25 9 L27 9 Z" fill="url(#dark-gradient)" />
+
+  <!-- Eyes -->
+  <circle cx="15" cy="16" r="2" fill="#FFF"/>
+  <circle cx="21" cy="16" r="2" fill="#FFF"/>
+
+  <!-- Nose and Mouth -->
+  <path d="M18 20L17 22H19L18 20Z" fill="#FFF"/>
+  <path d="M18 22L17.5 24H18.5L18 22Z" fill="#FFF"/>
+
+  <!-- Whiskers -->
+  <path d="M13 19L9 20" stroke="#FFF" stroke-width="0.5" stroke-linecap="round"/>
+  <path d="M13 21L9 22" stroke="#FFF" stroke-width="0.5" stroke-linecap="round"/>
+  <path d="M13 23L9 24" stroke="#FFF" stroke-width="0.5" stroke-linecap="round"/>
+  <path d="M23 19L27 20" stroke="#FFF" stroke-width="0.5" stroke-linecap="round"/>
+  <path d="M23 21L27 22" stroke="#FFF" stroke-width="0.5" stroke-linecap="round"/>
+  <path d="M23 23L27 24" stroke="#FFF" stroke-width="0.5" stroke-linecap="round"/>
+</svg>

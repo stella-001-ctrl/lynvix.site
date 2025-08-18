@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lynvix</title>
+
+  <!-- Meta polish -->
+  <meta name="description" content="Lynvix - pro grade mouse for crisp aim and smooth tracking.">
+  <meta name="theme-color" content="#0be0ff">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Lynvix">
+  <meta property="og:description" content="Lock On. Every Pixel.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="logo.png">
+
+  <!-- Favicon (inline SVG so no extra files needed) -->
+  <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="%230b0f14"/><text x="32" y="41" text-anchor="middle" font-size="34" fill="%230be0ff" font-family="Arial,Helvetica,sans-serif">L</text></svg>'>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0b0f12;
+      --panel:#121821;
+      --text:#e5e7eb;
+      --muted:#9ca3af;
+      --brand:#00e5ff;
+      --accent:#14f195;
+      --border:#1b2431;
+      --shadow:0 10px 30px rgba(0,0,0,.35), 0 0 60px rgba(0,229,255,.12);
+    }
+    [data-theme="light"]{
+      --bg:#ffffff;
+      --panel:#f3f4f6;
+      --text:#0b1220;
+      --muted:#4b5563;
+      --brand:#0284c7;
+      --accent:#059669;
+      --border:#e5e7eb;
+      --shadow:0 10px 30px rgba(0,0,0,.07), 0 0 40px rgba(2,132,199,.12);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;scroll-behavior:smooth}
+    a{color:var(--brand);text-decoration:none} a:hover{text-decoration:underline}
+    .wrap{max-width:1150px;margin:0 auto;padding:0 20px}
+    .btn{display:inline-flex;align-items:center;gap:.6rem;background:linear-gradient(135deg, var(--brand) 0%, #39f 30%, #09c 100%);color:#001018;border:0;border-radius:999px;padding:14px 22px;font-weight:800;letter-spacing:.2px;box-shadow:var(--shadow);cursor:pointer}
+    .btn.secondary{background:transparent;color:var(--text);border:1px solid var(--border)}
+    .btn.small{padding:10px 14px;font-weight:700}
+    .badge{display:inline-block;padding:6px 10px;border-radius:999px;background:transparent;color:#7dd3fc;border:1px solid var(--border);font-size:.8rem}
+    .muted{color:var(--muted)}
+
+    .skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+    .skip-link:focus{position:static;width:auto;height:auto;padding:8px;background:var(--panel);border:1px solid var(--border);border-radius:8px;display:inline-block;margin:10px;color:var(--text)}
+
+    header{position:sticky;top:0;z-index:50;backdrop-filter:saturate(180%) blur(8px);background:rgba(11,15,18,.75);border-bottom:1px solid #111}
+    [data-theme="light"] header{background:rgba(255,255,255,.75)}
+    nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+    .brand{display:flex;align-items:center;gap:.65rem}
+    .brand img.logo{height:36px;width:auto;display:block}
+    .brand-name{font-family:Orbitron,Inter,system-ui;font-weight:800;letter-spacing:.5px}
+    .nav-right{display:flex;align-items:center;gap:14px}
+
+    .hero{padding:72px 0 36px}
+    .hero-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:40px;align-items:center}
+    h1{font-family:Orbitron,Inter,system-ui;line-height:1.05;font-size:clamp(2rem,4.6vw,3.4rem);margin:.25rem 0 .75rem}
+    .lead{color:var(--muted);font-size:1.05rem}
+    .hero-card{background:linear-gradient(180deg,var(--panel),rgba(10,16,22,.6));border:1px solid var(--border);border-radius:16px;padding:20px;box-shadow:var(--shadow)}
+    .spec-chip{display:inline-flex;gap:.5rem;align-items:center;padding:8px 12px;border-radius:999px;background:transparent;border:1px solid var(--border);color:#b1e3ff;font-size:.85rem;margin:.25rem .25rem .25rem 0}
+    [data-theme="light"] .spec-chip{color:#0b1220}
+
+    .shot{aspect-ratio: 16 / 10; border-radius:16px; background: radial-gradient(1200px 400px at 70% 60%, rgba(0,229,255,.25), transparent 40%), linear-gradient(180deg,#0a1219,#05080d); border:1px solid var(--border); position:relative; overflow:hidden; display:grid;place-items:center}
+    [data-theme="light"] .shot{background:linear-gradient(180deg,#ffffff,#f3f4f6)}
+    .mouse{width:min(92%,720px); filter: drop-shadow(0 30px 50px rgba(0,0,0,.35))}
+
+    .strip{padding:26px 0;border-top:1px solid #0f151c;border-bottom:1px solid #0f151c;background:#0a0f14}
+    [data-theme="light"] .strip{background:#f9fafb;border-color:#e5e7eb}
+    .logos{display:flex;gap:30px;flex-wrap:wrap;align-items:center;justify-content:center;opacity:.85}
+
+    .section{padding:64px 0}
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .card{background:linear-gradient(180deg,var(--panel),rgba(10,16,22,.6));border:1px solid var(--border);border-radius:16px;padding:22px;box-shadow:var(--shadow)}
+    .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:14px}
+    .kpi{background:transparent;border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center}
+
+    .table{width:100%;border-collapse:collapse;margin-top:10px}
+    .table th,.table td{border:1px solid var(--border);padding:10px;text-align:left}
+    .table th{background:#0f1620;color:#9ccfe6}
+    [data-theme="light"] .table th{background:#eef2ff;color:#0b1220}
+
+    .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .tile{aspect-ratio:4/3;border-radius:12px;background:#0b141d;border:1px solid var(--border);display:grid;place-items:center;color:#79e6ff}
+    [data-theme="light"] .tile{background:#f3f4f6;color:#0b1220}
+
+    .reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .review{background:transparent;border:1px solid var(--border);border-radius:12px;padding:16px}
+    .stars{color:#ffd166}
+
+    .pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .price-card{background:transparent;border:1px solid var(--border);border-radius:16px;padding:22px}
+    .price{font-size:1.8rem;font-weight:800}
+
+    details{background:transparent;border:1px solid var(--border);border-radius:12px;padding:16px;margin:10px 0}
+    summary{cursor:pointer;font-weight:700} summary::-webkit-details-marker{display:none}
+
+    footer{padding:36px 0;border-top:1px solid #0f151c;color:#93a4b3}
+    [data-theme="light"] footer{border-color:#e5e7eb;color:#4b5563}
+    .footgrid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:20px}
+
+    .cookie{position:fixed;left:20px;right:20px;bottom:20px;background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:14px;display:flex;gap:14px;align-items:center;justify-content:space-between;box-shadow:var(--shadow)}
+
+    @media (max-width:960px){
+      .hero-grid{grid-template-columns:1fr}
+      .cards{grid-template-columns:1fr}
+      .kpis{grid-template-columns:repeat(2,1fr)}
+      .gallery{grid-template-columns:1fr 1fr}
+      .reviews{grid-template-columns:1fr}
+      .pricing{grid-template-columns:1fr}
+      .footgrid{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width:560px){
+      .footgrid{grid-template-columns:1fr}
+      nav .brand-name{display:none}
+    }
+
+    /* Interactive polish */
+    .btn, .card, .price-card, .tile, .spec-chip, .kpi { transition: transform .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease, border-color .18s ease; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 12px 34px rgba(0,229,255,.18), 0 0 60px rgba(0,229,255,.16); }
+    .btn:active { transform: translateY(0); }
+    .btn.secondary:hover { border-color: var(--brand); color: #bfefff; background: rgba(0,229,255,.06); }
+    .card:hover, .price-card:hover, .tile:hover { transform: translateY(-3px); border-color: var(--brand); box-shadow: 0 16px 40px rgba(0,229,255,.14); }
+    .kpi:hover { transform: translateY(-2px); border-color: var(--brand); }
+    .spec-chip:hover { border-color: var(--brand); background: rgba(0,229,255,.08); }
+    .nav-right a:not(.btn) { position: relative; }
+    .nav-right a:not(.btn)::after { content:""; position:absolute; left:0; right:0; bottom:-3px; height:2px; background:linear-gradient(90deg,var(--brand),#6ee7b7); transform:scaleX(0); transform-origin:left; transition:transform .18s ease; }
+    .nav-right a:not(.btn):hover::after { transform:scaleX(1); }
+    .shot:hover .mouse { transform: translateY(-4px) scale(1.01); transition: transform .2s ease; }
+
+    /* Scroll reveal */
+    .reveal { opacity: 0; transform: translateY(18px) scale(.98); transition: opacity .5s ease, transform .5s ease; }
+    .reveal.is-visible { opacity: 1; transform: translateY(0) scale(1); }
+
+    /* Toast */
+    .toast {
+      position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%) translateY(10px);
+      background: rgba(12,18,24,.95); color: #c8f6ff; border: 1px solid rgba(11,224,255,.35);
+      padding: 12px 16px; border-radius: 12px; font-size: 14px; box-shadow: 0 12px 40px rgba(0,229,255,.15);
+      opacity: 0; transition: opacity .18s ease, transform .18s ease; z-index: 9999;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  </style>
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Product",
+    "name":"Lynvix AI GripSense Adaptive Gaming Mouse",
+    "brand":{"@type":"Brand","name":"Lynvix"},
+    "description":"Adaptive comfort and precision performance with indicator based RGB designed for gamers in Pakistan.",
+    "category":"https://schema.org/ComputerPeripheral",
+    "aggregateRating":{"@type":"AggregateRating","ratingValue":"5.0","reviewCount":"3"},
+    "offers":{"@type":"Offer","priceCurrency":"PKR","availability":"https://schema.org/PreOrder","url":"https://lynvix.pk/"}
+  }
+  </script>
+</head>
+<body data-theme="dark">
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <header role="banner">
+    <div class="wrap">
+      <nav aria-label="Main navigation">
+        <div class="brand">
+          <img class="logo" src="lynvix_logo.svg" alt="Lynx face logo (SVG)" width="36" height="36">
+          <strong class="brand-name">LYNVIX</strong>
+          <span class="badge">PK Launch</span>
+        </div>
+        <div class="nav-right">
+          <a href="#features" class="muted">Features</a>
+          <a href="#specs" class="muted">Specs</a>
+          <a href="#waitlist" class="btn small">Join Waitlist</a>
+          <button id="themeToggle" class="btn secondary small" aria-pressed="false" aria-label="Toggle dark or light mode">Dark Mode</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="wrap hero-grid">
+        <div>
+          <h1 id="hero-title">AI GripSense. <span style="color:var(--brand)">Built to Win.</span></h1>
+          <p class="lead">The Lynvix adaptive gaming mouse learns your hold and calibrates for comfort and control, so you clutch more and strain less. Designed for Pakistan's gamers.</p>
+          <div class="kpis" role="list" aria-label="Key product stats">
+            <div class="kpi"><strong>80g</strong><div class="muted">Lightweight</div></div>
+            <div class="kpi"><strong>26K</strong><div class="muted">DPI Sensor</div></div>
+            <div class="kpi"><strong>&lt; 1 ms</strong><div class="muted">2.4G Latency</div></div>
+            <div class="kpi"><strong>70h</strong><div class="muted">Battery Life</div></div>
+          </div>
+          <div class="cta" style="margin-top:16px">
+            <a class="btn" href="#waitlist">Get Early Access</a>
+            <a class="btn secondary" href="#specs">View Specs</a>
+          </div>
+        </div>
+        <div class="hero-card" aria-label="Product render">
+          <div class="shot">
+            <img class="mouse" src="gaming_mouse.svg" alt="Lynvix Gaming Mouse render">
+          </div>
+          <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:10px">
+            <span class="spec-chip">AI GripSense</span>
+            <span class="spec-chip">Indicator RGB (Cyan)</span>
+            <span class="spec-chip">Ergo Palm Claw Hybrid</span>
+            <span class="spec-chip">USB C + 2.4G Wireless</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="strip" role="region" aria-label="Social proof">
+      <div class="wrap">
+        <div class="logos">
+          <span class="muted">Trusted by competitive and casual gamers • Pakistan Launch • Early Access</span>
+        </div>
+      </div>
+    </div>
+
+    <section id="features" class="section" aria-labelledby="features-title">
+      <div class="wrap">
+        <h2 id="features-title" style="font-family:Orbitron;margin:0 0 12px">Why Lynvix</h2>
+        <p class="muted" style="margin:0 0 22px">Adaptive comfort meets precision performance. Three pillars define the experience.</p>
+        <div class="cards" role="list">
+          <article class="card" role="listitem">
+            <h3>Adaptive GripSense</h3>
+            <p class="muted">Learns your hold and motion patterns, nudging sensitivity for steadier aim and reduced fatigue.</p>
+          </article>
+          <article class="card" role="listitem">
+            <h3>Indicator RGB</h3>
+            <p class="muted">Clean cyan indicator lighting for status and subtle immersion, no disco, just signal.</p>
+          </article>
+          <article class="card" role="listitem">
+            <h3>Ergo. Light. Fast.</h3>
+            <p class="muted">80g body, palm claw hybrid shell, premium switches, and sub 1 ms wireless.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="specs" class="section" style="padding-top:24px" aria-labelledby="specs-title">
+      <div class="wrap">
+        <h2 id="specs-title" style="font-family:Orbitron;margin:0 0 12px">Specifications</h2>
+        <table class="table">
+          <tr><th>Sensor</th><td>PixArt 3395 class, 100 to 26,000 DPI</td></tr>
+          <tr><th>Latency</th><td>&lt; 1 ms (2.4 GHz) • USB C wired</td></tr>
+          <tr><th>Weight</th><td>about 80 g</td></tr>
+          <tr><th>Battery</th><td>Up to 70 hours</td></tr>
+          <tr><th>Shape</th><td>Palm claw hybrid, right hand ergonomic</td></tr>
+          <tr><th>Finish</th><td>Stealth matte black, gunmetal accents</td></tr>
+          <tr><th>Lighting</th><td>Indicator based cyan RGB (status aware)</td></tr>
+          <tr><th>Connectivity</th><td>USB C (wired) + 2.4 GHz wireless</td></tr>
+          <tr><th>Feet</th><td>PTFE low friction skates</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="gallery-title">
+      <div class="wrap">
+        <h2 id="gallery-title" style="font-family:Orbitron;margin:0 0 12px">Gallery</h2>
+        <div class="gallery">
+          <div class="tile"><img src="mouse_front.svg" alt="Lynvix Mouse Front View" style="width:90%;height:auto;"></div>
+          <div class="tile"><img src="mouse_top.svg" alt="Lynvix Mouse Top Shell" style="width:90%;height:auto;"></div>
+          <div class="tile"><img src="mouse_side.svg" alt="Lynvix Mouse Side Grip" style="width:90%;height:auto;"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="reviews-title">
+      <div class="wrap">
+        <h2 id="reviews-title" style="font-family:Orbitron;margin:0 0 12px">Early Reviews</h2>
+        <div class="reviews">
+          <div class="review"><div class="stars">★★★★★</div><p class="muted">Light, fast, and comfy. The cyan indicators look clean.</p><small class="muted">Beta tester</small></div>
+          <div class="review"><div class="stars">★★★★★</div><p class="muted">GripSense felt natural after a day. Aim felt steadier.</p><small class="muted">FPS player</small></div>
+          <div class="review"><div class="stars">★★★★☆</div><p class="muted">Battery life is solid and the shape fits my hand well.</p><small class="muted">Casual gamer</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="pricing-title">
+      <div class="wrap">
+        <h2 id="pricing-title" style="font-family:Orbitron;margin:0 0 12px">Preorder Info</h2>
+        <div class="pricing">
+          <div class="price-card">
+            <h3>Founders Drop</h3>
+            <p class="muted">Limited early access in Pakistan.</p>
+            <p class="price">PKR 14,999</p>
+            <ul class="muted">
+              <li>AI GripSense</li>
+              <li>2.4G Wireless + USB C</li>
+              <li>Indicator RGB</li>
+            </ul>
+            <a class="btn" href="#waitlist">Join Waitlist</a>
+          </div>
+          <div class="price-card">
+            <h3>Bundle</h3>
+            <p class="muted">Mouse plus PTFE skates and carry pouch.</p>
+            <p class="price">PKR 17,499</p>
+            <ul class="muted">
+              <li>All Founders features</li>
+              <li>Extra skates</li>
+              <li>Carry pouch</li>
+            </ul>
+            <a class="btn" href="#contact">Ask About Bundle</a>
+          </div>
+          <div class="price-card">
+            <h3>Team Pack</h3>
+            <p class="muted">Clubs and cafes get bulk pricing.</p>
+            <p class="price">Talk to us</p>
+            <ul class="muted">
+              <li>Bulk discounts</li>
+              <li>Local support</li>
+              <li>Custom branding</li>
+            </ul>
+            <a class="btn" href="#contact">Contact Sales</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="waitlist" class="section" style="padding-top:24px" aria-labelledby="waitlist-title">
+      <div class="wrap">
+        <h2 id="waitlist-title" style="font-family:Orbitron;margin:0 0 12px">Join the Waitlist</h2>
+        <p class="muted">Be first to know about pricing, drops, and early bird deals in Pakistan.</p>
+        <!-- data-ajax enables the generic handler below -->
+        <form id="waitlistForm" data-ajax class="card" style="display:grid;gap:12px;max-width:600px" aria-describedby="waitlistDesc">
+          <p id="waitlistDesc" class="muted">Submit the form below and we will email you when preorder opens.</p>
+          <div style="display:grid;gap:8px">
+            <label for="name">Name</label>
+            <input id="name" name="name" required placeholder="Your name"
+              style="padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:var(--panel);color:var(--text)">
+          </div>
+          <div style="display:grid;gap:8px">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required placeholder="you@example.com"
+              style="padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:var(--panel);color:var(--text)">
+          </div>
+          <div style="display:grid;gap:8px">
+            <label for="platform">Primary Platform</label>
+            <select id="platform" name="platform" style="padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:var(--panel);color:var(--text)">
+              <option>Instagram</option>
+              <option>TikTok</option>
+              <option>YouTube</option>
+            </select>
+          </div>
+          <button type="submit" class="btn" style="justify-content:center">Get Early Access</button>
+          <small class="muted">We will never spam. Unsubscribe anytime.</small>
+          <div id="msg" class="muted" aria-live="polite"></div>
+        </form>
+      </div>
+    </section>
+
+    <section id="contact" class="section" aria-labelledby="contact-title">
+      <div class="wrap">
+        <h2 id="contact-title" style="font-family:Orbitron;margin:0 0 12px">Contact</h2>
+        <p class="muted">For sales or partnerships, send us a note.</p>
+        <!-- data-ajax enables the generic handler below -->
+        <form id="contactForm" data-ajax class="card" style="display:grid;gap:12px;max-width:700px">
+          <div style="display:grid;gap:8px">
+            <label for="cname">Name</label>
+            <input id="cname" name="name" required placeholder="Your name"
+              style="padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:var(--panel);color:var(--text)">
+          </div>
+          <div style="display:grid;gap:8px">
+            <label for="cemail">Email</label>
+            <input id="cemail" name="email" type="email" required placeholder="you@example.com"
+              style="padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:var(--panel);color:var(--text)">
+          </div>
+          <div style="display:grid;gap:8px">
+            <label for="cmsg">Message</label>
+            <textarea id="cmsg" name="message" rows="5" placeholder="Tell us what you need" style="padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:var(--panel);color:var(--text)"></textarea>
+          </div>
+          <button type="submit" class="btn" style="justify-content:center">Send Message</button>
+          <div id="cstatus" class="muted" aria-live="polite"></div>
+        </form>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="faq-title">
+      <div class="wrap faq">
+        <h2 id="faq-title" style="font-family:Orbitron;margin:0 0 12px">FAQ</h2>
+        <details>
+          <summary>When does Lynvix launch in Pakistan?</summary>
+          <p class="muted">We are preparing the first drop now. Join the waitlist to get priority access and early bird pricing.</p>
+        </details>
+        <details>
+          <summary>Is AI GripSense a gimmick?</summary>
+          <p class="muted">No. The goal is adaptive comfort and control with subtle, context aware adjustments informed by your grip and motion patterns.</p>
+        </details>
+        <details>
+          <summary>Will there be left hand support?</summary>
+          <p class="muted">Right hand ergonomic is first. We are exploring an ambidextrous shell. Register interest via the waitlist.</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <div class="wrap footgrid">
+      <div>
+        <div class="brand" style="margin-bottom:8px">
+          <img src="lynvix_logo.svg" alt="Lynx face logo (SVG)" class="logo" width="36" height="36" />
+          <strong class="brand-name">LYNVIX</strong>
+        </div>
+        <p class="muted">Adaptive comfort. Precision performance. Built for victory.</p>
+      </div>
+      <div>
+        <div class="muted" style="margin-bottom:8px">Company</div>
+        <div><a href="#">About</a></div>
+        <div><a href="#">Careers</a></div>
+        <div><a href="#">Press</a></div>
+      </div>
+      <div>
+        <div class="muted" style="margin-bottom:8px">Support</div>
+        <div><a href="#faq-title">FAQ</a></div>
+        <div><a href="#contact">Contact</a></div>
+        <div><a href="#">Warranty</a></div>
+      </div>
+      <div>
+        <div class="muted" style="margin-bottom:8px">Legal</div>
+        <div><a href="#">Privacy</a></div>
+        <div><a href="#">Terms</a></div>
+        <div><a href="#">Cookies</a></div>
+      </div>
+    </div>
+    <div class="wrap" style="margin-top:18px">
+      <small class="muted">© <span id="year"></span> Lynvix. All rights reserved. • Contact: <a href="mailto:contact@lynvix.pk">contact@lynvix.pk</a></small>
+    </div>
+  </footer>
+
+  <div id="cookie" class="cookie" role="dialog" aria-live="polite" aria-label="Cookie consent" hidden>
+    <span class="muted">We use cookies for basic analytics and to improve the site.</span>
+    <span style="display:flex;gap:10px">
+      <button id="acceptCookies" class="btn small">Accept</button>
+      <button id="declineCookies" class="btn secondary small">Decline</button>
+    </span>
+  </div>
+
+  <!-- Base utilities (year, theme, cookies) -->
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const themeToggle = document.getElementById('themeToggle');
+    const root = document.body;
+    const saved = localStorage.getItem('lynvix_theme');
+    if(saved) root.setAttribute('data-theme', saved);
+    themeToggle.textContent = root.getAttribute('data-theme') === 'light' ? 'Dark Mode' : 'Light Mode';
+    themeToggle.addEventListener('click', () => {
+      const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      themeToggle.textContent = next === 'light' ? 'Dark Mode' : 'Light Mode';
+      localStorage.setItem('lynvix_theme', next);
+    });
+    const cookie = document.getElementById('cookie');
+    const accept = document.getElementById('acceptCookies');
+    const decline = document.getElementById('declineCookies');
+    function setCookieConsent(v){ localStorage.setItem('lynvix_cookie', v); }
+    function getCookieConsent(){ return localStorage.getItem('lynvix_cookie'); }
+    if(!getCookieConsent()) cookie.hidden = false;
+    accept.addEventListener('click', ()=>{ setCookieConsent('accepted'); cookie.hidden = true; });
+    decline.addEventListener('click', ()=>{ setCookieConsent('declined'); cookie.hidden = true; });
+  </script>
+
+  <!-- One clean app script: rotating title, reveal, toast, and Google Sheets submit -->
+  <script>
+  /* Rotating tagline */
+  (function(){
+    const heroTitle = document.getElementById('hero-title');
+    if (!heroTitle) return;
+    const taglines = [
+      'Lock On. Every Pixel.',
+      'Flick Fast. Track Smooth.',
+      'Aim Steady. Click True.',
+      'Precision Built For Wins.'
+    ];
+    let i = 0;
+    heroTitle.style.transition = 'opacity .18s ease';
+    setInterval(() => {
+      i = (i + 1) % taglines.length;
+      heroTitle.style.opacity = '0';
+      setTimeout(() => { heroTitle.textContent = taglines[i]; heroTitle.style.opacity = '1'; }, 150);
+    }, 3000);
+  })();
+
+  /* Scroll reveal */
+  (function(){
+    const toReveal = [...document.querySelectorAll('.card, .price-card, .tile, .kpi, section, .spec-chip')];
+    toReveal.forEach(el => el.classList.add('reveal'));
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('is-visible'); });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
+    toReveal.forEach(el => io.observe(el));
+  })();
+
+  /* Toast helper */
+  function showToast(msg){
+    const t = document.createElement('div');
+    t.className = 'toast'; t.textContent = msg;
+    document.body.appendChild(t);
+    requestAnimationFrame(()=> t.classList.add('show'));
+    setTimeout(()=>{ t.classList.remove('show'); setTimeout(()=>t.remove(), 200); }, 2200);
+  }
+
+  /* Google Sheets submit for any form with data-ajax (CORS-safe) */
+  (function(){
+    const WEB_APP = 'https://script.google.com/macros/s/AKfycbzKBAR8VwX3cVzYeH7LFw2qERgADetSOhYgiWkk8XcfzihUczBcqWKBm32nbkgx9tUw1Q/exec'; // ends with /exec
+
+    document.querySelectorAll('form[data-ajax]').forEach(form => {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (!WEB_APP) { showToast('Set your backend URL first'); return; }
+
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalLabel = submitBtn ? submitBtn.textContent : '';
+        const statusEl = form.querySelector('#msg, #cstatus, [aria-live="polite"]');
+
+        // Gather fields
+        const payload = Object.fromEntries(new FormData(form).entries());
+
+        // UI: loading state
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.style.opacity = '0.7';
+          submitBtn.textContent = 'Sending…';
+        }
+        if (statusEl) statusEl.textContent = 'Sending…';
+
+        try {
+          // Use no-cors so the request succeeds even if the script doesn’t return CORS headers
+          await fetch(WEB_APP, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+
+          form.reset();
+          if (statusEl) statusEl.textContent = 'Thanks! You’re on the early access list.';
+          showToast('✅ Added to waitlist');
+        } catch (err) {
+          if (statusEl) statusEl.textContent = 'Could not send. Try again.';
+          showToast('❌ Could not send. Try again.');
+          console.error(err);
+        } finally {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.style.opacity = '';
+            submitBtn.textContent = originalLabel || 'Submit';
+          }
+        }
+      });
+    });
+  })();
+  </script>
+</body>
+</html>
